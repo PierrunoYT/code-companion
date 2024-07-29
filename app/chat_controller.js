@@ -65,7 +65,7 @@ class ChatController {
       apiKey = this.settings.openRouterApiKey;
       AIModel = OpenRouterModel;
       if (this.settings.selectedModel.includes('claude-3.5-sonnet')) {
-        this.settings.selectedModel = 'anthropic/claude-3-sonnet-20240229';
+        this.settings.selectedModel = 'anthropic/claude-3.5-sonnet';
       }
     } else if (this.settings.selectedModel.toLowerCase().includes('claude')) {
       apiKey = this.settings.anthropicApiKey;
