@@ -236,6 +236,15 @@
         </button>
       </div>
 
+      <label for="openRouterApiKey" class="form-label mt-4">OpenRouter API Key:</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="openRouterApiKey" placeholder="OpenRouter API Key" />
+        <button class="btn btn-outline-secondary" type="button" id="saveOpenRouterApiKey"
+          onclick="chatController.saveSetting('openRouterApiKey');">
+          Save
+        </button>
+      </div>
+
       <label for="apiKey" class="form-label mt-4">API Endpoint URL:</label>
       <div class="input-group">
         <input type="text" class="form-control" id="baseUrl" placeholder="Optional" />
