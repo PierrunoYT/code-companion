@@ -1,19 +1,10 @@
 const modelOptions = {
-  'gpt-4-turbo': 'GPT-4 Turbo',
-  'gpt-4o': 'GPT-4o',
-  'gpt-4o-mini': 'GPT-4o Mini',
-  'gpt-4': 'GPT-4',
-  'claude-3-5-sonnet-20240620': 'Claude 3.5 Sonnet',
-  'claude-3-opus-20240229': 'Claude 3 Opus',
-  'openrouter:anthropic/claude-3-opus-20240229': 'OpenRouter: Claude 3 Opus',
-  'openrouter:anthropic/claude-3-sonnet-20240229': 'OpenRouter: Claude 3 Sonnet',
-  'openrouter:google/gemini-pro': 'OpenRouter: Gemini Pro',
-  'openrouter:meta-llama/llama-2-70b-chat': 'OpenRouter: Llama 2 70B',
+  'openrouter:anthropic/claude-3-sonnet-20240229': 'OpenRouter: Claude 3.5 Sonnet',
 };
 
-const defaultModel = 'claude-3-5-sonnet-20240620';
-const defaultOpenAISmallModel = 'gpt-4o-mini';
-const defaultAnthropicSmallModel = 'claude-3-haiku-20240307';
+const defaultModel = 'openrouter:anthropic/claude-3-sonnet-20240229';
+const defaultOpenAISmallModel = 'openrouter:anthropic/claude-3-sonnet-20240229';
+const defaultAnthropicSmallModel = 'openrouter:anthropic/claude-3-sonnet-20240229';
 
 const EMBEDDINGS_VERSION = 'v1.9'; // when reindexing of code embedding is needed, update this version
 const EMBEDDINGS_MODEL_NAME = 'text-embedding-ada-002';
