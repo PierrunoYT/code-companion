@@ -83,16 +83,22 @@ class ChatController {
     }
 
     this.abortController = new AbortController();
-    this.model = new AIModel({
-      apiKey,
-      model: this.settings.selectedModel,
-      baseUrl: this.settings.baseUrl,
-      chatController: this,
-      streamCallback: (snapshot) => {
-        this.chat.updateStreamingMessage(snapshot);
-      },
-      systemPrompt: this.settings.systemPrompt,
-    });
+    try {
+      this.model = new AIModel({
+        apiKey,
+        model: this.settings.selectedModel,
+        baseUrl: this.settings.baseUrl,
+        chatController: this,
+        streamCallback: (snapshot) => {
+          this.chat.updateStreamingMessage(snapshot);
+        },
+        systemPrompt: this.settings.systemPrompt,
+      });
+    } catch (error) {
+      console.error('Error initializing model:', error);
+      this.chat.addFrontendMessage('error', `Error initializing model: ${error.message}`);
+      return;
+    }
     this.initializeSmallModel();
     this.backgroundTask = new BackgroundTask(this);
   }
