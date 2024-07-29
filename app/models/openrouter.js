@@ -4,9 +4,10 @@ const { log, getTokenCount } = require('../utils');
 const MAX_RETRIES = 5;
 
 class OpenRouterModel {
-  constructor({ model, apiKey, streamCallback, chatController }) {
+  constructor({ model, apiKey, streamCallback, chatController, systemPrompt }) {
     this.model = model;
     this.chatController = chatController;
+    this.systemPrompt = systemPrompt;
     const config = {
       apiKey: apiKey,
       dangerouslyAllowBrowser: true,
@@ -21,7 +22,9 @@ class OpenRouterModel {
     let response;
     const callParams = {
       model: model || this.model,
-      messages,
+      messages: this.shouldUseSystemPrompt(model || this.model) ? 
+        [{ role: 'system', content: this.systemPrompt }, ...messages] : 
+        messages,
       temperature,
     };
     if (tool !== null) {
@@ -94,6 +97,10 @@ class OpenRouterModel {
       type: 'function',
       function: tool,
     };
+  }
+
+  shouldUseSystemPrompt(model) {
+    return model.includes('anthropic/claude-3.5-sonnet') && this.systemPrompt;
   }
 
   abort() {

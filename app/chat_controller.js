@@ -85,6 +85,7 @@ class ChatController {
       streamCallback: (snapshot) => {
         this.chat.updateStreamingMessage(snapshot);
       },
+      systemPrompt: this.settings.systemPrompt,
     });
     this.initializeSmallModel();
     this.backgroundTask = new BackgroundTask(this);
