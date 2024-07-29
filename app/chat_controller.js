@@ -61,12 +61,12 @@ class ChatController {
 
     this.model = null;
 
-    if (this.settings.selectedModel.toLowerCase().includes('claude')) {
-      apiKey = this.settings.anthropicApiKey;
-      AIModel = AnthropicModel;
-    } else if (this.settings.selectedModel.startsWith('openrouter:')) {
+    if (this.settings.selectedModel.startsWith('openrouter:')) {
       apiKey = this.settings.openRouterApiKey;
       AIModel = OpenRouterModel;
+    } else if (this.settings.selectedModel.toLowerCase().includes('claude')) {
+      apiKey = this.settings.anthropicApiKey;
+      AIModel = AnthropicModel;
     } else {
       apiKey = this.settings.apiKey;
       AIModel = OpenAIModel;
