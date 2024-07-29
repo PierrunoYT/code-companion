@@ -73,6 +73,7 @@ class ChatController {
     }
 
     if (!apiKey) {
+      console.warn(`API key not set for ${this.settings.selectedModel}`);
       return;
     }
 
@@ -170,9 +171,17 @@ class ChatController {
     document.getElementById('retry_button').setAttribute('hidden', true);
 
     if (!this.model) {
+      let apiKeyType = 'API';
+      if (this.settings.selectedModel.toLowerCase().includes('claude')) {
+        apiKeyType = 'Anthropic API';
+      } else if (this.settings.selectedModel.startsWith('openrouter:')) {
+        apiKeyType = 'OpenRouter API';
+      } else if (this.settings.selectedModel.toLowerCase().includes('gpt')) {
+        apiKeyType = 'OpenAI API';
+      }
       this.chat.addFrontendMessage(
         'error',
-        'Please add your API key under settings menu (<i class="bi bi-gear bg-body border-0"></i>)',
+        `Please add your ${apiKeyType} key under settings menu (<i class="bi bi-gear bg-body border-0"></i>)`,
       );
       return;
     }
