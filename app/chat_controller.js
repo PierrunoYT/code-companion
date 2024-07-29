@@ -178,16 +178,19 @@ class ChatController {
 
     if (!this.model) {
       let apiKeyType = 'API';
+      let settingsKey = 'apiKey';
       if (this.settings.selectedModel.toLowerCase().includes('claude')) {
         apiKeyType = 'Anthropic API';
+        settingsKey = 'anthropicApiKey';
       } else if (this.settings.selectedModel.startsWith('openrouter:')) {
         apiKeyType = 'OpenRouter API';
+        settingsKey = 'openRouterApiKey';
       } else if (this.settings.selectedModel.toLowerCase().includes('gpt')) {
         apiKeyType = 'OpenAI API';
       }
       this.chat.addFrontendMessage(
         'error',
-        `Please add your ${apiKeyType} key under settings menu (<i class="bi bi-gear bg-body border-0"></i>)`,
+        `Please add your ${apiKeyType} key under settings menu (<i class="bi bi-gear bg-body border-0"></i>). Set the "${settingsKey}" field.`,
       );
       return;
     }
