@@ -77,6 +77,12 @@ class ChatController {
       return;
     }
 
+    // Additional check for OpenRouter models
+    if (this.settings.selectedModel.startsWith('openrouter:') && !this.settings.openRouterApiKey) {
+      console.warn('OpenRouter API key not set');
+      return;
+    }
+
     this.abortController = new AbortController();
     this.model = new AIModel({
       apiKey,
@@ -182,6 +188,15 @@ class ChatController {
       this.chat.addFrontendMessage(
         'error',
         `Please add your ${apiKeyType} key under settings menu (<i class="bi bi-gear bg-body border-0"></i>)`,
+      );
+      return;
+    }
+
+    // Additional check for OpenRouter models
+    if (this.settings.selectedModel.startsWith('openrouter:') && !this.settings.openRouterApiKey) {
+      this.chat.addFrontendMessage(
+        'error',
+        `Please add your OpenRouter API key under settings menu (<i class="bi bi-gear bg-body border-0"></i>)`,
       );
       return;
     }
