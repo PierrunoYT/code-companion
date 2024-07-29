@@ -77,12 +77,6 @@ class ChatController {
       return;
     }
 
-    // Additional check for OpenRouter models
-    if (this.settings.selectedModel.startsWith('openrouter:') && !this.settings.openRouterApiKey) {
-      console.warn('OpenRouter API key not set');
-      return;
-    }
-
     this.abortController = new AbortController();
     this.model = new AIModel({
       apiKey,
