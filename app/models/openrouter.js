@@ -22,7 +22,7 @@ class OpenRouterModel {
     let response;
     const actualModel = this.getModelIdentifier(model || this.model);
     const callParams = {
-      model: `openrouter:${actualModel}`,
+      model: actualModel,
       messages: this.shouldUseSystemPrompt(actualModel) ? 
         [{ role: 'system', content: this.systemPrompt }, ...messages] : 
         messages,

@@ -64,6 +64,8 @@ class ChatController {
     if (this.settings.selectedModel.startsWith('openrouter:')) {
       apiKey = this.settings.openRouterApiKey;
       AIModel = OpenRouterModel;
+      // Remove the 'openrouter:' prefix if it exists
+      this.settings.selectedModel = this.settings.selectedModel.replace('openrouter:', '');
       if (this.settings.selectedModel.includes('claude-3.5-sonnet')) {
         this.settings.selectedModel = 'anthropic/claude-3.5-sonnet';
       }
