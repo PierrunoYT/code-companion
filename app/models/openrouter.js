@@ -20,9 +20,10 @@ class OpenRouterModel {
 
   async call({ messages, model, tool = null, tools = null, temperature = 0.0 }) {
     let response;
+    const actualModel = this.getModelIdentifier(model || this.model);
     const callParams = {
-      model: model || this.model,
-      messages: this.shouldUseSystemPrompt(model || this.model) ? 
+      model: actualModel,
+      messages: this.shouldUseSystemPrompt(actualModel) ? 
         [{ role: 'system', content: this.systemPrompt }, ...messages] : 
         messages,
       temperature,
@@ -101,6 +102,13 @@ class OpenRouterModel {
 
   shouldUseSystemPrompt(model) {
     return model.includes('anthropic/claude-3.5-sonnet') && this.systemPrompt;
+  }
+
+  getModelIdentifier(model) {
+    if (model.includes('claude-3.5-sonnet')) {
+      return 'anthropic/claude-3.5-sonnet';
+    }
+    return model;
   }
 
   abort() {
