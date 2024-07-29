@@ -5,6 +5,10 @@ const modelOptions = {
   'gpt-4': 'GPT-4',
   'claude-3-5-sonnet-20240620': 'Claude 3.5 Sonnet',
   'claude-3-opus-20240229': 'Claude 3 Opus',
+  'openrouter:anthropic/claude-3-opus-20240229': 'OpenRouter: Claude 3 Opus',
+  'openrouter:anthropic/claude-3-sonnet-20240229': 'OpenRouter: Claude 3 Sonnet',
+  'openrouter:google/gemini-pro': 'OpenRouter: Gemini Pro',
+  'openrouter:meta-llama/llama-2-70b-chat': 'OpenRouter: Llama 2 70B',
 };
 
 const defaultModel = 'claude-3-5-sonnet-20240620';

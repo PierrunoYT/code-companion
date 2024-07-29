@@ -11,12 +11,14 @@ const { trackEvent } = require('@aptabase/electron/renderer');
 const BackgroundTask = require('./background_task');
 const OpenAIModel = require('./models/openai');
 const AnthropicModel = require('./models/anthropic');
+const OpenRouterModel = require('./models/openrouter');
 const { defaultModel, defaultOpenAISmallModel, defaultAnthropicSmallModel } = require('./static/models_config');
 const { allEnabledTools, planningTools } = require('./tools/tools');
 
 const DEFAULT_SETTINGS = {
   apiKey: '',
   anthropicApiKey: '',
+  openRouterApiKey: '',
   baseUrl: '',
   selectedModel: defaultModel,
   approvalRequired: true,
@@ -59,12 +61,15 @@ class ChatController {
 
     this.model = null;
 
-    if (!this.settings.selectedModel.toLowerCase().includes('claude')) {
-      apiKey = this.settings.apiKey;
-      AIModel = OpenAIModel;
-    } else {
+    if (this.settings.selectedModel.toLowerCase().includes('claude')) {
       apiKey = this.settings.anthropicApiKey;
       AIModel = AnthropicModel;
+    } else if (this.settings.selectedModel.startsWith('openrouter:')) {
+      apiKey = this.settings.openRouterApiKey;
+      AIModel = OpenRouterModel;
+    } else {
+      apiKey = this.settings.apiKey;
+      AIModel = OpenAIModel;
     }
 
     if (!apiKey) {
@@ -125,7 +130,7 @@ class ChatController {
     this.settings[key] = value;
     this.renderSettingValueInUI(key, value);
 
-    if (key === 'apiKey' || key === 'baseUrl' || key === 'anthropicApiKey' || key === 'selectedModel') {
+    if (key === 'apiKey' || key === 'baseUrl' || key === 'anthropicApiKey' || key === 'openRouterApiKey' || key === 'selectedModel') {
       this.initializeModel();
     }
   }
